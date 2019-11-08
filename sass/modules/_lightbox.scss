@@ -1,25 +1,15 @@
 .lightbox { 
     display: none;
-    //display: flex;
-    flex-direction: row;
     min-height: 100vh;
     width: 100%;
-    position: fixed;
+    position: fixed !important;
     top: 0;
-    z-index: 5000;
-    padding: 20px;
+    z-index: 10000 !important;
+    overflow: scroll !important;
 
-    background-color: rgba(0, 0,0, 0.85);
+    background-color: rgb(228, 98, 78, 0.95);
 
-    .sidebar {
-        flex: 1;
-    }
-    
-    .lb-content {
-        flex: 3;
-    }
-
-    img { max-width: 250px; }
+    img { max-width: 300px; }
 
     .close {    
         right: 24px;
@@ -32,6 +22,19 @@
         border-radius: 50%;
         background-color: rgba(255,255,255,0.25);
     }
+
+    .lb-Container {
+        padding: 60px 30px 50px 30px;
+    }
+
+    .lb-content {
+        padding: 30px;
+    }
+
+    .lbCont {
+        padding-top: 20%;
+    }
+
 }
 
 .show-lb { display: flex !important; }

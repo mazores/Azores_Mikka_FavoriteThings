@@ -4,7 +4,8 @@ const myVM = (() => {
     // get the user buttons and fire off an async DB query with Fetch
 
     let userButtons = document.querySelectorAll('.u-link'),
-        lightBox = document.querySelector('.lightbox');
+        lightBox = document.querySelector('.lightbox'),
+        lightBoxImage = document.querySelector('.happy-item-image');
 
     // create the social media list
     function renderSocialMedia(media) {
@@ -13,19 +14,26 @@ const myVM = (() => {
                 </ul>`
     }
 
-    function parseUserData(person) {
+    function parseUserData(happyItem) {
         let targetDiv = lightBox.querySelector('.lb-content'),
-            targetImg = lightBox.querySelector('img');
+            targetDivImg = lightBox.querySelector('.happy-item-image'),
+            targetImg = lightBoxImage.querySelector('img');
 
         let bioContent = `
-            <p>${person.bio}</p>
-            <h4>Social Media:</h4>
+            <h2>${happyItem.Title}</h2>
+            <p>${happyItem.Description}</p>
+            <br><h2>The Favorites</h2>
             <!-- loop through social media stuff here -->
-            ${renderSocialMedia(person.social)}
+            ${renderSocialMedia(happyItem.favorite)}
+        `;
+
+        let bioImage = `
+            <img src="images/${happyItem.DescPhoto}" alt="Happy List Photo" class="lb-photo"></img>
         `;
 
         targetDiv.innerHTML = bioContent;
-        targetImg.src = person.currentSrc;
+        targetDivImg.innerHTML = bioImage;
+        //targetImg.src = happyItem.currentSrc;
 
         lightBox.classList.add('show-lb');
     }
@@ -34,8 +42,8 @@ const myVM = (() => {
         event.preventDefault();
         //debugger;
         // 1, 2, or 3 depending on which anchor tag you click:
-        let url = `/${this.getAttribute('href')}`,
-            currentImg = this.previousElementSibling.getAttribute('src');
+        let url = `/users/${this.getAttribute('href')}`,
+            currentImg = this.firstElementChild.getAttribute('src');
 
         // this goes and fetches the database content (or an API endpoint)
         // that's why it's called a fetch
